@@ -113,6 +113,24 @@ public class Fabrica extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnProcesar(ActionEvent arg0) {
-
+		double pre,impC,desc,impP;
+		int cant,lapi;
+		pre = Double.parseDouble(txtPrecio.getText());
+		cant = Integer.parseInt(txtCantidad.getText());
+		impC = pre*cant;
+		desc = impC * 0.07;
+		impP = impC - desc;
+		lapi = 2 * cant;
+		
+	txtS.setText("Importe compra     : " + decimalFormat(impC) + "\n");
+		imprimir("Importe descuento  : " + decimalFormat(desc));
+		imprimir("Importe pagar      : " + decimalFormat(impP));
+		imprimir("Lapiceros          : " + lapi);
+	}
+	String decimalFormat(double p){
+		return String.format("%.2f",p);
+	}
+	void imprimir(String s) {
+		txtS.append(s + "\n");
 	}
 }
