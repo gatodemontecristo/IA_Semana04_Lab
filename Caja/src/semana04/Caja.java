@@ -42,8 +42,7 @@ public class Caja extends JFrame implements ActionListener {
 				try {
 					Caja frame = new Caja();
 					frame.setVisible(true);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -68,39 +67,39 @@ public class Caja extends JFrame implements ActionListener {
 
 		txtS = new JTextArea();
 		scpScroll.setViewportView(txtS);
-		
+
 		lblLargo = new JLabel("Largo");
 		lblLargo.setBounds(10, 11, 46, 14);
 		contentPane.add(lblLargo);
-		
+
 		txtLargo = new JTextField();
 		txtLargo.setBounds(66, 8, 86, 20);
 		contentPane.add(txtLargo);
 		txtLargo.setColumns(10);
-		
+
 		lblAncho = new JLabel("Ancho");
 		lblAncho.setBounds(10, 36, 46, 14);
 		contentPane.add(lblAncho);
-		
+
 		txtAncho = new JTextField();
 		txtAncho.setBounds(66, 33, 86, 20);
 		contentPane.add(txtAncho);
 		txtAncho.setColumns(10);
-		
+
 		lblAlto = new JLabel("Alto");
 		lblAlto.setBounds(10, 61, 46, 14);
 		contentPane.add(lblAlto);
-		
+
 		txtAlto = new JTextField();
 		txtAlto.setBounds(66, 58, 86, 20);
 		contentPane.add(txtAlto);
 		txtAlto.setColumns(10);
-		
+
 		btnProcesar = new JButton("Procesar");
 		btnProcesar.addActionListener(this);
 		btnProcesar.setBounds(335, 7, 89, 23);
 		contentPane.add(btnProcesar);
-		
+
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(this);
 		btnBorrar.setBounds(335, 32, 89, 23);
@@ -115,7 +114,7 @@ public class Caja extends JFrame implements ActionListener {
 			actionPerformedBtnProcesar(arg0);
 		}
 	}
-	
+
 	protected void actionPerformedBtnBorrar(ActionEvent arg0) {
 		txtLargo.setText("");
 		txtAncho.setText("");
@@ -123,8 +122,24 @@ public class Caja extends JFrame implements ActionListener {
 		txtS.setText("");
 		txtLargo.requestFocus();
 	}
-	
-	protected void actionPerformedBtnProcesar(ActionEvent arg0) {
 
+	protected void actionPerformedBtnProcesar(ActionEvent arg0) {
+		double la, anch, alt, volumen, area;
+		la = Double.parseDouble(txtLargo.getText());
+		anch = Double.parseDouble(txtAncho.getText());
+		alt = Double.parseDouble(txtAlto.getText());
+
+		volumen = la * anch * alt;
+		area = 2 * (la * anch + la * alt + anch * alt);
+		
+		txtS.setText("Volumen    : " + decimalFormat(volumen) + "\n");
+		    imprimir("Area total : " + decimalFormat(area));
+	}
+
+	String decimalFormat(double p) {
+		return String.format("%.2f", p);
+	}
+	void imprimir(String s) {
+		txtS.append(s + "\n");
 	}
 }
